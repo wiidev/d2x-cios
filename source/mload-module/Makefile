@@ -12,9 +12,19 @@ STRIP	=	../stripios
 # Strip address
 SADDR	=	0x13700000
 
+# Committer date for reproducible builds
+SOURCE_DATE_EPOCH ?= $(shell git log -1 --pretty=%ct)
+ifdef SOURCE_DATE_EPOCH
+	BUILD_DATE ?= $(shell LC_ALL=C date -u -d "@$(SOURCE_DATE_EPOCH)" "+'%b %e %Y'" 2>/dev/null || LC_ALL=C date -u -r "$(SOURCE_DATE_EPOCH)" "+'%b %e %Y'" 2>/dev/null || LC_ALL=C date -u "+'%b %e %Y'")
+	BUILD_TIME ?= $(shell LC_ALL=C date -u -d "@$(SOURCE_DATE_EPOCH)" "+'%H:%M:%S'" 2>/dev/null || LC_ALL=C date -u -r "$(SOURCE_DATE_EPOCH)" "+'%H:%M:%S'" 2>/dev/null || LC_ALL=C date -u "+'%H:%M:%S'")
+else
+	BUILD_DATE ?= $(shell date "+'%b %e %Y'")
+	BUILD_TIME ?= $(shell date "+'%H:%M:%S'")
+endif
+
 # Flags
 ARCH	=	-mcpu=arm926ej-s -mthumb -mthumb-interwork -mbig-endian
-CFLAGS	=	$(ARCH) -I. -I../cios-lib -fomit-frame-pointer -Os -Wall
+CFLAGS	=	$(ARCH) -I. -I../cios-lib -fomit-frame-pointer -Os -Wall -Wno-builtin-macro-redefined -D__TIME__=\"$(BUILD_TIME)\" -D__DATE__=\"$(BUILD_DATE)\"
 LDFLAGS	=	$(ARCH) -nostartfiles -Wl,-T,link.ld,-Map,$(TARGET).map -Wl,--gc-sections -Wl,-static
 
 # Libraries
