@@ -1,0 +1,49 @@
+name: Build cIOS
+
+on:
+  push:
+    branches:
+      - "**"
+    paths-ignore:
+      - '**.md'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/FUNDING.yml'
+      - '.github/**/*.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/FUNDING.yml'
+      - '.github/**/*.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download devkitPPC r32
+        run: |
+          wget "https://github.com/Leseratte10/compile-devkitARM-r32/releases/download/2020-02-20/devkitARM-r32-linux_debian-buster.tar.gz"
+          tar -xf devkitARM-r32-linux_debian-buster.tar.gz -C /opt
+          rm devkitARM-r32-linux_debian-buster.tar.gz
+
+      - name: Compile stripios
+        run: |
+          cd stripios_src
+          g++ main.cpp -o stripios
+          cp stripios ..
+
+      - name: Compile cIOS
+        run: |
+          sudo apt-get install -y libfl2
+          chmod +x maked2x.sh
+          ./maked2x.sh ${{ secrets.VERSION }}
+          echo "upload_name=v${{ secrets.VERSION }}-$(git rev-parse --short=7 HEAD)" | tr ' ' '-' >> $GITHUB_ENV
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with: 
+          name: d2x-${{ env.upload_name }}
+          path: build

@@ -67,7 +67,7 @@ do_make() {
         echo
         echo Making $1 $3...
         cd source/$1
-        make $3 STRIP=../stripios
+        make $3 STRIP=../../stripios
         if [ $? != 0 ]; then
                 echo
                 echo Build failed!!!
