@@ -1,0 +1,8 @@
+*.a
+*.o
+*.elf
+*.orig
+*.map
+*.exe
+build/
+/stripios
