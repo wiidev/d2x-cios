@@ -199,7 +199,7 @@ static s32 __ES_GetTicketView(u32 tidh, u32 tidl, u8 *view)
 		return ret;
 
 	/* Generate ticket view */
-	*(u32 *)  (view + 0x00) = (*(u32 *) (buffer + 0x1BC)) & 0xFF000000;
+	*(u32 *) (view + 0x00) = (*(u32 *) (buffer + 0x1BC)) & 0xFF000000;
 	ES_memcpy(view + 0x04, buffer + 0x1D0, sizeof(tikview) - 0x04);
 	*(u16 *) (view + 0x96) = 0;
 

@@ -768,9 +768,12 @@ s32 USBStorage_Open(usbstorage_handle *dev, struct ehci_device *fd)
 
 
 			if(uid->endpoints != NULL)
-						USB_Free(uid->endpoints);uid->endpoints= NULL;
+				USB_Free(uid->endpoints);
+			uid->endpoints=NULL;
+
 			if(uid->extra != NULL)
-						USB_Free(uid->extra);uid->extra=NULL;
+				USB_Free(uid->extra);
+			uid->extra=NULL;
 
 			if(uid->bInterfaceClass == USB_CLASS_HUB)
 				{

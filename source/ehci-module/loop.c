@@ -5,6 +5,7 @@
 	Copyright (C) 2009 kwiirk.
 	Copyright (C) 2009 Hermes.
 	Copyright (C) 2009 Waninkoko.
+	Copyright (C) 2022 blackb0x.
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@
 #include "ipc.h"
 #include "mem.h"
 #include "module.h"
+#include "sdhc_server.h"
 #include "stealth.h"
 #include "syscalls.h"
 #include "usbstorage.h"
@@ -328,6 +330,9 @@ s32 __EHCI_Init(u32 *queuehandle, u32 *timerId)
 	/* Register device */
 	os_device_register(DEVICE, ret);
 
+	/* Register SDHC device */
+	SDHC_RegisterDevice(*queuehandle);
+
 	/* Create watchdog timer */
 	ret = os_create_timer(WATCHDOG_TIMER, WATCHDOG_TIMER, ret, 0);
 	if (ret < 0)
@@ -381,6 +386,12 @@ s32 EHCI_Loop(void)
 				break;
 			}
 
+			/* SDHC module device */
+			if (SDHC_CheckDevicePath(devpath)) {
+				ret = SDHC_FD;
+				break;
+			}
+
 			/* Module device */
 			if (!strcmp(devpath, DEVICE)) {
 				/* Discover devices */
@@ -410,7 +421,13 @@ s32 EHCI_Loop(void)
 		}
 
 		case IOS_CLOSE: {
-			/* Close device */
+			/* Close SDHC device */
+			if(message->fd == SDHC_FD) {
+				ret = SDHC_Close();
+				break;
+			}
+
+			/* Close USB device */
 			if(ums_mode != message->fd)
 				ehci_close_device(ehci_fd_to_dev(message->fd));
 			else
@@ -429,7 +446,10 @@ s32 EHCI_Loop(void)
 			u32     cmd    = message->ioctlv.command;
 
 			/* Parse IOCTLV command */
-			ret = __EHCI_Ioctlv(message->fd, cmd, vector, inlen, iolen, &ack);
+			if (message->fd == SDHC_FD)
+				ret = SDHC_Ioctlv(cmd, vector, inlen, iolen);
+			else
+				ret = __EHCI_Ioctlv(message->fd, cmd, vector, inlen, iolen, &ack);
 
 			break;
 		}
@@ -438,7 +458,6 @@ s32 EHCI_Loop(void)
 			/* Unknown command */
 			ret = IPC_EINVAL;
 		}
-
 
 		/* Restart watchdog timer */
 		os_restart_timer(timerId, WATCHDOG_TIMER, 0);

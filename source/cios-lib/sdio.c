@@ -583,7 +583,7 @@ bool sdio_Startup(void)
 	/* Already initialized */
 	if (__sdio_initialized)
 		return true;
- 
+
 	/* Open device */
 	__sd0_fd = os_open(_sd0_fs, 1);
 

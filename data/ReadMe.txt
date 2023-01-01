@@ -1,7 +1,7 @@
 /*
- * cIOS d2x v${MAJOR_VER} ${MINOR_VER} 
+ * cIOS d2x v${MAJOR_VER} ${MINOR_VER} by blackb0x
  *
- * by davebaol
+ * Previous releases were by davebaol
  * 
  */  
 
@@ -21,8 +21,8 @@
   This IOS has been made to be used ONLY with homebrew software.
 
   The d2x cIOS is an enhanced version of the cIOSX rev21 by Waninkoko. 
-  To see what's new read the file Changelog.txt or visit the d2x google code
-  project: http://code.google.com/p/d2x-cios
+  To see what's new read the file Changelog.txt or visit the d2x GitHub
+  page: https://github.com/wiidev/d2x-cios
 
 
 [ HOW TO INSTALL IT ]

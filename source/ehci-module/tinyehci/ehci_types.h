@@ -3,8 +3,6 @@
 /* linux kernel types needed by our code */
 #define __iomem
 
-typedef unsigned int uint32_t;
-
 #include "types.h"
 
 #define __u32 u32

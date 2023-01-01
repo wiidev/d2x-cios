@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ciosmaps ciosgroupscount="1">
 	<ciosgroup name="d2x-v${MAJOR_VER}-${MINOR_VER}" version="${IOS_REV}" basescount="3">
-		<base ios="56" version="5918" contentscount="22" modulescount="7">
+		<base ios="56" version="5918" contentscount="21" modulescount="6">
 			<content id="0x0" patchscount="7">
 				<!-- cIOS signature fields -->
 				<patch offset="0x00" size="4"  originalbytes="0x66,0x69,0x72,0x6d" newbytes="0x1e,0xe7,0xc1,0x05"/>
@@ -43,13 +43,12 @@
 			</content>
 			<content id="0x19" module="MLOAD" tmdmoduleid="-1"/>
 			<content id="0x1a" module="FAT" tmdmoduleid="-1"/>
-			<content id="0x1b" module="SDHC" tmdmoduleid="-1"/>
-			<content id="0x1c" module="EHCI" tmdmoduleid="3"/>
-			<content id="0x1d" module="DIPP" tmdmoduleid="-1"/>
-			<content id="0x1e" module="ES" tmdmoduleid="-1"/>
-			<content id="0x1f" module="FFSP" tmdmoduleid="-1"/>
+			<content id="0x1b" module="EHCI" tmdmoduleid="3"/>
+			<content id="0x1c" module="DIPP" tmdmoduleid="-1"/>
+			<content id="0x1d" module="ES" tmdmoduleid="-1"/>
+			<content id="0x1e" module="FFSP" tmdmoduleid="-1"/>
 		</base>
-		<base ios="57" version="6175" contentscount="26" modulescount="7">
+		<base ios="57" version="6175" contentscount="25" modulescount="6">
 			<content id="0x0" patchscount="7">
 				<patch offset="0x00" size="4"  originalbytes="0x66,0x69,0x72,0x6d" newbytes="0x1e,0xe7,0xc1,0x05"/>
 				<patch offset="0x04" size="4"  originalbytes="0x77,0x61,0x72,0x65" newbytes="0x00,0x00,0x00,0x01"/>
@@ -94,13 +93,12 @@
 			</content>
 			<content id="0x1d" module="MLOAD" tmdmoduleid="-1"/>
 			<content id="0x1e" module="FAT" tmdmoduleid="-1"/>
-			<content id="0x1f" module="SDHC" tmdmoduleid="-1"/>
-			<content id="0x20" module="EHCI" tmdmoduleid="2"/>
-			<content id="0x21" module="DIPP" tmdmoduleid="-1"/>
-			<content id="0x22" module="ES" tmdmoduleid="-1"/>
-			<content id="0x23" module="FFSP" tmdmoduleid="-1"/>
+			<content id="0x1f" module="EHCI" tmdmoduleid="2"/>
+			<content id="0x20" module="DIPP" tmdmoduleid="-1"/>
+			<content id="0x21" module="ES" tmdmoduleid="-1"/>
+			<content id="0x22" module="FFSP" tmdmoduleid="-1"/>
 		</base>
-		<base ios="58" version="6432" contentscount="26" modulescount="7">
+		<base ios="58" version="6432" contentscount="25" modulescount="6">
 			<content id="0x0" patchscount="7">
 				<!-- cIOS signature fields -->
 				<patch offset="0x00" size="4"  originalbytes="0x66,0x69,0x72,0x6d" newbytes="0x1e,0xe7,0xc1,0x05"/>
@@ -146,11 +144,10 @@
 			</content>
 			<content id="0x18" module="MLOAD" tmdmoduleid="-1"/>
 			<content id="0x19" module="FAT" tmdmoduleid="-1"/>
-			<content id="0x1a" module="SDHC" tmdmoduleid="-1"/>
-			<content id="0x1b" module="USBS" tmdmoduleid="-1"/>
-			<content id="0x1c" module="DIPP" tmdmoduleid="-1"/>
-			<content id="0x1d" module="ES" tmdmoduleid="-1"/>
-			<content id="0x1e" module="FFSP" tmdmoduleid="-1"/>
+			<content id="0x1a" module="USBS" tmdmoduleid="-1"/>
+			<content id="0x1b" module="DIPP" tmdmoduleid="-1"/>
+			<content id="0x1c" module="ES" tmdmoduleid="-1"/>
+			<content id="0x1d" module="FFSP" tmdmoduleid="-1"/>
 		</base>
 	</ciosgroup>
 </ciosmaps>

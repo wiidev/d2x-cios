@@ -31,13 +31,13 @@ s32 (*DI_Printf)(const char * fmt, ...);
 #else
 #define DI_Printf(fmt, ...)     do {} while (0)
 #endif
-s32   (*DI_ReadHash)(void); 
-void *(*DI_Alloc)(u32 size, u32 align);
-void  (*DI_Free)(void *ptr);
+extern s32   (*DI_ReadHash)(void); 
+extern void *(*DI_Alloc)(u32 size, u32 align);
+extern void  (*DI_Free)(void *ptr);
 
 /* DIP handlers */
-s32 DI_HandleIoctl(void *buffer, u32 fd);
-s32 DI_HandleCmd(void *inbuf, const void *outbuf, u32 size);
-s32 DI_HandleInitDrive(void); 
+extern s32 DI_HandleIoctl(void *buffer, u32 fd);
+extern s32 DI_HandleCmd(void *inbuf, const void *outbuf, u32 size);
+extern s32 DI_HandleInitDrive(void); 
 
 #endif

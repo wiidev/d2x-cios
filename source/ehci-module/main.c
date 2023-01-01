@@ -5,6 +5,7 @@
 	Copyright (C) 2009 kwiirk.
 	Copyright (C) 2009 Hermes.
 	Copyright (C) 2009 Waninkoko.
+	Copyright (C) 2022 blackb0x.
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@
 #include "types.h"
 
 
-char *moduleName = "EHCI";
+char *moduleName = "EHCI/SDHC";
 
 int main(void)
 {

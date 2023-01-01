@@ -3,6 +3,12 @@
 +-----------+
 
 
+[ d2x v11 ]
+
+- Fixed RiiConnect24 compatibility by removing the SDHC module and adding
+  the SDHC functions directly to the cIOS lib.
+- Added EmuNAND UStealth support thanks to airline38.
+
 [ d2x v10 ]
 
 - Added support for Virtual Wii bases 56/57/58.
@@ -21,6 +27,7 @@
   * Minor changes and code clean up.
 
 [ d2x v9 ]
+
 - Switched to d2x-alt branch.
 
 [ d2x v8 ]

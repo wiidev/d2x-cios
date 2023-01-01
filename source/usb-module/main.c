@@ -5,6 +5,7 @@
 	Copyright (C) 2009 WiiGator.
 	Copyright (C) 2009 Waninkoko.
 	Copyright (C) 2011 davebaol.
+	Copyright (C) 2022 blackb0x.
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 #include "ipc.h"
 #include "mem.h"
 #include "module.h"
+#include "sdhc_server.h"
 #include "stealth.h"
 #include "syscalls.h"
 #include "timer.h"
@@ -36,7 +38,7 @@
 
 
 /* Variables */
-char *moduleName = "USBS";
+char *moduleName = "USBS/SDHC";
 s32 queuehandle = -1;
 
 /* Async replies */
@@ -214,6 +216,9 @@ s32 __USB_Initialize(void)
 	/* Copy queue handler */
 	queuehandle = ret;
 
+	/* Register SDHC device */
+	SDHC_RegisterDevice(queuehandle);
+
 	return 0;
 }
 
@@ -252,18 +257,34 @@ int main(void)
 				break;
 			}
 
+			char *devpath = message->open.device;
+
 			/* Check device path */
-			if (!strcmp(message->open.device, DEVICE_NAME))
+			if (!strcmp(devpath, DEVICE_NAME)) {
 				ret = message->open.resultfd;
-			else
-				ret = IPC_ENOENT;
+				break;
+			}
+
+			/* SDHC module device */
+			if (SDHC_CheckDevicePath(devpath)) {
+				ret = SDHC_FD;
+				break;
+			}
+
+			/* Wrong device */
+			ret = IPC_ENOENT;
 
 			break;
 		}
 
 		case IOS_CLOSE: {
-			/* Do nothing */
-			ret = 0;
+			if (message->fd == SDHC_FD) {
+				/* Close SDHC device */
+				ret = SDHC_Close();
+			} else {
+				/* Do nothing */
+				ret = 0;
+			}
 			break;
 		}
 
@@ -274,7 +295,10 @@ int main(void)
 			u32     cmd    = message->ioctlv.command;
 
 			/* Parse IOCTLV message */
-			ret = __USB_Ioctlv(cmd, vector, inlen, iolen);
+			if (message->fd == SDHC_FD)
+				ret = SDHC_Ioctlv(cmd, vector, inlen, iolen);
+			else
+				ret = __USB_Ioctlv(cmd, vector, inlen, iolen);
 
 			break;
 		}

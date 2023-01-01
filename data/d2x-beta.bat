@@ -4,6 +4,7 @@
 
 set ciosversion=${IOS_REV}
 ::must be <=65535
+::if ciosversion above is different from version in ciosmaps.xml, then ModMii v6.5.2 or higher required to build it successfully
 
 set d2x-beta-rev=${MAJOR_VER}-${MINOR_VER}
 ::This info is used to sign *00.app file for cIOS detection, everything after "=" but before the first "-" is considered the version # and it must be a number! Good examples are "5-beta1-test1" or "5" or "999". Bad examples are "5beta1" or "five-beta1" or "-5-beta1"
@@ -37,14 +38,14 @@ if /i "%wadname:~0,17%" EQU "cIOS249[70]-d2x-v" set md5=ac0ffee1eddad70defec8100
 if /i "%wadname:~0,17%" EQU "cIOS250[70]-d2x-v" set md5=ac0ffee1eddad70defec81005e570015
 if /i "%wadname:~0,17%" EQU "cIOS249[80]-d2x-v" set md5=ac0ffee1eddad70defec81005e570015
 if /i "%wadname:~0,17%" EQU "cIOS250[80]-d2x-v" set md5=ac0ffee1eddad70defec81005e570015
+if /i "%wadname:~0,17%" EQU "cIOS251[38]-d2x-v" set md5=ac0ffee1eddad70defec81005e570015
 ::------------------------Section to update (above)--------------------
 
 ::----------Additional Instructions---------------
 ::save any of the following beta files to the following directory
 ::if any of the following is not found, the standard d2x module used in the previous ModMii release will continue to be used
-::modules\More-cIOSs\{ANY FOLDER NAME}\mload.app
+::modules\More-cIOSs\{ANY FOLDER NAME}\MLOAD.app
 ::modules\More-cIOSs\{ANY FOLDER NAME}\FAT.app
-::modules\More-cIOSs\{ANY FOLDER NAME}\SDHC.app
 ::modules\More-cIOSs\{ANY FOLDER NAME}\EHCI.app
 ::modules\More-cIOSs\{ANY FOLDER NAME}\USBS.app
 ::modules\More-cIOSs\{ANY FOLDER NAME}\DIPP.app
