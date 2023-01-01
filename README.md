@@ -1,6 +1,9 @@
-#d2x cIOS
-
-[![d2x-cios logo](http://img403.imageshack.us/img403/585/d2xcioslogo.png)](https://github.com/davebaol/d2x-cios/)
+<p align="center"><a href="https://github.com/wiidev/d2x-cios/" title="d2x cIOS"><img src="assets/d2x-logo.jpg"></a></p>
+<p align="center">
+<a href="https://github.com/wiidev/d2x-cios/releases" title="Releases"><img src="https://img.shields.io/github/v/release/wiidev/d2x-cios?logo=github"></a>
+<a href="https://github.com/wiidev/d2x-cios/actions" title="Actions"><img src="https://img.shields.io/github/actions/workflow/status/wiidev/d2x-cios/main.yml?branch=master&logo=github"></a>
+</p>
+<hr>
 
 
 #### DISCLAIMER
@@ -25,7 +28,7 @@ NO ONE BUT YOURSELF IS RESPONSIBLE FOR ANY DAMAGE TO YOUR WII CONSOLE BECAUSE OF
 
 #### DOCUMENTATION
 
-  For documentation and tutorials visit our [Wiki](https://github.com/davebaol/d2x-cios/wiki).
+  For documentation and tutorials visit our [Wiki](https://github.com/wiidev/d2x-cios/wiki).
 
 
 
@@ -35,8 +38,8 @@ NO ONE BUT YOURSELF IS RESPONSIBLE FOR ANY DAMAGE TO YOUR WII CONSOLE BECAUSE OF
  * *Crediar*, for all I learned studying [Sneek](http://code.google.com/p/sneek) source code.
  * *Oggzee*, for his brilliant fraglist.
  * *WiiPower*, for the great help with ios reload block from usb.
- * *dragbe* and *NutNut*, for their [d2x cios installer](http://code.google.com/p/d2x-cios-installer).
- * *XFlak*, for his wonderful [ModMii](http://gbatemp.net/topic/207126-modmii-for-windows) which supported d2x wads since its birth. Without ModMii d2x cios would probably never have existed. Also, XFlak had the original idea to replace the buggy EHCI module of cIOSX rev21 with the  working one from rev19. 
+ * *dragbe* and *NutNut*, for their [d2x cIOS Installer](http://code.google.com/p/d2x-cios-installer).
+ * *XFlak*, for his wonderful [ModMii](http://gbatemp.net/topic/207126-modmii-for-windows) which supported d2x wads since its birth. Without ModMii d2x cIOS would probably never have existed. Also, XFlak had the original idea to replace the buggy EHCI module of cIOSX rev21 with the  working one from rev19. 
  * *[HackWii](http://www.hackwii.it)* and *[GBAtemp](http://www.gbatemp.net)* communities, for their ideas and support.
  * *Totoro*, for the official d2x logo
  * *ChaN*, for his [FatFs](http://elm-chan.org/fsw/ff/00index_e.html).
