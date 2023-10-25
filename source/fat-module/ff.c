@@ -89,6 +89,8 @@
 /                   Ignores duplicated directory separators in given path names.
 /---------------------------------------------------------------------------*/
 
+#include <string.h>
+
 #include "ff.h"			/* FatFs configurations and declarations */
 #include "diskio.h"		/* Declarations of low level disk I/O functions */
 
@@ -517,30 +519,10 @@ static WCHAR LfnBuf[_MAX_LFN+1];
 /*-----------------------------------------------------------------------*/
 
 /* Copy memory to memory */
-static
-void mem_cpy (void* dst, const void* src, UINT cnt) {
-	BYTE *d = (BYTE*)dst;
-	const BYTE *s = (const BYTE*)src;
-
-#if _WORD_ACCESS == 1
-	while (cnt >= sizeof(int)) {
-		*(int*)d = *(int*)s;
-		d += sizeof(int); s += sizeof(int);
-		cnt -= sizeof(int);
-	}
-#endif
-	while (cnt--)
-		*d++ = *s++;
-}
+#define mem_cpy (void)memcpy
 
 /* Fill memory */
-static
-void mem_set (void* dst, int val, UINT cnt) {
-	BYTE *d = (BYTE*)dst;
-
-	while (cnt--)
-		*d++ = (BYTE)val;
-}
+#define mem_set (void)memset
 
 /* Compare memory to memory */
 static
