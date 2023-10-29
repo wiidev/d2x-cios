@@ -10,8 +10,7 @@ AR	=	$(PREFIX)ar
 
 # Flags
 ARCH	=	-mcpu=arm926ej-s -mthumb -mthumb-interwork -mbig-endian
-CFLAGS	=	$(ARCH) -I. -ffreestanding -fomit-frame-pointer -Os -Wall
-CFLAGS2	=	-Wstrict-prototypes -ffunction-sections
+CFLAGS	=	$(ARCH) -I. -ffreestanding -fno-builtin -ffunction-sections -fomit-frame-pointer -Os -Wall -Wstrict-prototypes
 ARFLAGS	=	rcs
 
 # Libraries
@@ -56,7 +55,7 @@ $(TARGET).a: $(OBJS) $(OBJS2)
 
 libwbfs/%.o: libwbfs/%.c
 	@echo -e " CC\t$@"
-	@$(CC) $(CFLAGS) $(CFLAGS2) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 %.o: %.c
 	@echo -e " CC\t$@"

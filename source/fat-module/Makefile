@@ -21,7 +21,7 @@ endif
 
 # Flags
 ARCH	=	-mcpu=arm926ej-s -mthumb -mthumb-interwork -mbig-endian
-CFLAGS	=	$(ARCH) -I. -I../cios-lib -ffreestanding -fomit-frame-pointer -Os -Wall -ffunction-sections -Wno-builtin-macro-redefined -D___DATE___=\"$(BUILD_DATE)\" -D__TIME__=\"$(BUILD_TIME)\"
+CFLAGS	=	$(ARCH) -I. -I../cios-lib -ffreestanding -fno-builtin -ffunction-sections -fomit-frame-pointer -Os -Wall -ffunction-sections -Wno-builtin-macro-redefined -D___DATE___=\"$(BUILD_DATE)\" -D__TIME__=\"$(BUILD_TIME)\"
 LDFLAGS	=	$(ARCH) -nostartfiles -nostdlib -Wl,-T,link.ld,-Map,$(TARGET).map -Wl,--gc-sections -Wl,-static
 
 # Libraries

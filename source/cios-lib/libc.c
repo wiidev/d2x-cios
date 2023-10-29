@@ -61,7 +61,7 @@ void *memset(void *dest, int c, size_t size)
 	return dst;
 }
 
-void *memcpy(void *dest, const void *src, size_t size)
+void *memcpy(void *__restrict dest, const void *__restrict src, size_t size)
 {
 	unsigned int *addr;
 	unsigned int offset;
