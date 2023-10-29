@@ -1,4 +1,4 @@
-/*   
+/*
 	Custom IOS Module (EHCI)
 
 	Copyright (C) 2008 neimod.
@@ -34,7 +34,7 @@ char *moduleName = "EHCI/SDHC";
 int main(void)
 {
 	/* Heap space */
-	static u32 heapspace[0x5000] ATTRIBUTE_ALIGN(32);
+	static u32 heapspace[0x1000] ATTRIBUTE_ALIGN(32);
 
 	s32 ret;
 

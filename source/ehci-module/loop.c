@@ -1,4 +1,4 @@
-/*   
+/*
 	Custom IOS Module (EHCI)
 
 	Copyright (C) 2008 neimod.
@@ -311,13 +311,8 @@ void __EHCI_Watchdog(void)
 
 s32 __EHCI_Init(u32 *queuehandle, u32 *timerId)
 {
-	void *buffer = NULL;
+	static u32 buffer[32];
 	s32   ret;
-
-	/* Allocate buffer*/
-	buffer = Mem_Alloc(0x80);
-	if (!buffer)
-		return IPC_ENOMEM;
 
 	/* Create message queue */
 	ret = os_message_queue_create(buffer, 32);
@@ -466,6 +461,6 @@ s32 EHCI_Loop(void)
 		if (ack)
 			os_message_queue_ack(message, ret);
 	}
-   
+
 	return 0;
 }

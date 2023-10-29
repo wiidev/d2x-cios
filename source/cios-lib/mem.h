@@ -1,4 +1,4 @@
-/*   
+/*
 	Custom IOS Library
 
 	Copyright (C) 2008 neimod.
@@ -27,6 +27,8 @@
 
 #include "ios.h"
 #include "types.h"
+
+#define MEM1_SIZE 0x1800000
 
 /* Prototypes */
 s32   Mem_Init(u32 *heapspace, u32 heapspaceSize);
