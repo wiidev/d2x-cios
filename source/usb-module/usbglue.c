@@ -130,6 +130,19 @@ bool usbstorage_IsInserted(void)
 			if (retval < 0)
 				continue;
 
+			/* Ignore encrypted Wii U drives */
+			u8 *mbr = Mem_Alloc(512);
+			if (mbr)
+			{
+				USBStorage_Read(&__usbfd, j, 0, 1, mbr);
+				if (*(u32 *)mbr != 0x57424653 && *(u16 *)(mbr + 510) != 0x55AA && *(u16 *)(mbr + 510) != 0x55AB)
+				{
+					Mem_Free(mbr);
+					continue;
+				}
+				Mem_Free(mbr);
+			}
+
 			/* Set parameters */
 			__mounted = true;
 			__lun = j;
