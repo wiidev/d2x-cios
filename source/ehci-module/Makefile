@@ -22,7 +22,7 @@ endif
 # Flags
 ARCH	=	-mcpu=arm926ej-s -mthumb -mthumb-interwork -mbig-endian
 CFLAGS	=	$(ARCH) -I. -Itinyehci -I../cios-lib -fomit-frame-pointer -Os -Wall -Wstrict-prototypes -ffunction-sections -Wno-address-of-packed-member -Wno-builtin-macro-redefined -D__TIME__=\"$(BUILD_TIME)\" -D__DATE__=\"$(BUILD_DATE)\"
-LDFLAGS	=	$(ARCH) -nostartfiles -Wl,-T,link.ld,-Map,$(TARGET).map -Wl,--gc-sections -Wl,-static
+LDFLAGS	=	$(ARCH) -nostartfiles -nostdlib -Wl,-T,link.ld,-Map,$(TARGET).map -Wl,--gc-sections -Wl,-static
 
 # Libraries
 LIBS	=	../cios-lib/cios-lib.a
@@ -41,7 +41,7 @@ OBJS	=	loop.o				\
 
 $(TARGET).elf: $(OBJS) $(LIBS)
 	@echo -e " LD\t$@"
-	@$(LD) $(LDFLAGS) $(OBJS) $(LIBS) -o $@.orig
+	@$(LD) $(LDFLAGS) $(OBJS) $(LIBS) -lgcc -o $@.orig
 	@$(STRIP) $@.orig $@
 
 %.o: %.s
