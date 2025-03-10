@@ -5,6 +5,13 @@
 
 [ d2x v11 ]
 
+- Improved WiiWare & VC compatibility by using some MEM1 safe functions.
+- Improved game compatibility when using base IOS58 by ignoring encrypted
+  USB drives that are used for Wii U games.
+- Added base IOS38 v4380 support for vWii.
+- Enabled Korean key patching for vWii.
+- Fixed a typo that made the FAT module not reproducible.
+- Reduced memory usage for the EHCI module.
 - Fixed RiiConnect24 compatibility by removing the SDHC module and adding
   the SDHC functions directly to the cIOS lib.
 - Added EmuNAND UStealth support thanks to airline38.

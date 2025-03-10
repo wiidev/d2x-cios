@@ -110,6 +110,22 @@ s32 Patch_DipModule(void)
 		break;
 	}
 
+	/** 04/03/12 12:00:16 **/
+	case 0x4F7AE650: {      // vIOS: 38v4380
+		static dipAddrInfo aInfo = {
+			0x20200068,	// init
+			0x202003B8,	// ioctl
+			0x20200D2C,	// cmd
+			0x20202888,	// readHash
+			0x202008C4,	// alloc
+			0x20200898,	// free
+			0x20203670,	// printf
+			0x2022CDAC	// readCtrl
+		};
+		__Patch_DipModule(&aInfo);
+		break;
+	}
+
 	/** 11/24/08 15:39:09 **/
 	case 0x492ACA9D:        // IOS: 60v6174
 	/** 06/03/09 07:49:09 **/

@@ -142,6 +142,20 @@ s32 Patch_EsModule(void)
 		break;
 	}
 
+	/** 04/03/12 12:05:51 **/
+	case 0x4F7AE79F: {	// vIOS: 38v4380
+		static esAddrInfo addrInfo = {
+			0x20100048,	// open
+			0x201000CC,	// ioctlv
+			0x20104600,	// launchTitle
+			0x20109450,	// memcpy
+			0x20109598,	// printf
+			0x20109A40	// snprintf
+		};
+		__Patch_EsModule(&addrInfo);
+		break;
+	}
+
 	/** 04/02/12 14:00:51 **/
 	case 0x4F79B113: {	// vIOS: 56v5918, 57v6175, 58v6432
 		static esAddrInfo addrInfo = {

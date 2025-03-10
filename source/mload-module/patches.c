@@ -100,6 +100,13 @@ s32 Patch_DipModule(void)
 
 		break;
 
+	/** 04/03/12 12:00:16 **/
+	case 0x4F7AE650:      // vIOS: 38v4380
+		/* Unencrypted read limit */
+		DCWrite32(0x20206380, 0x7ED40000);
+
+		break;
+
 	/** 11/24/08 15:39:09 **/
 	case 0x492ACA9D:       // IOS: 60v6174
 	/** 06/03/09 07:49:09 **/
@@ -242,6 +249,29 @@ s32 Patch_EsModule(void)
 		break;
 	}
 
+	/** 04/03/12 12:05:51 **/
+	case 0x4F7AE79F: {	// vIOS: 38v4380
+		static esAddrInfo addrInfo = {
+			0x13A750DE,	// signatureCheck1  (added in d2x v8 r42)
+			0x13A75266,	// signatureCheck2
+			0x20100CC4,	// identifyCheck1
+			0x20100D3C,	// identifyCheck2
+			0x20104D7C,	// openContentPerm1
+			0x20104DA0,	// openContentPerm2
+			0x0,		// openContentPerm3
+			0x20104E98,	// readContentPerm
+			0x20104EE8,	// seekContentPerm
+			0x20105206,	// setUidCheck
+			0x201026EC,	// titleVersionCheck
+			0x2010789E,	// titleDeleteCheck
+			0x0		// decryptCheck
+		};
+
+		__Patch_EsModule(&addrInfo);
+
+		break;
+	}
+
 	/** 04/02/12 14:00:51 **/
 	case 0x4F79B113: {	// vIOS: 56v5918, 57v6175, 58v6432
 		static esAddrInfo addrInfo = {
@@ -284,9 +314,16 @@ s32 Patch_FfsModule(void)
 		break;
 
 	/** 12/23/09 17:26:21 **/
-	case 0x49511F3D:
+	case 0x49511F3D:           //  IOS: 38v4123
 		/* Permissions check */
 		DCWrite8(0x2000347E, 0xE0);
+
+		break;
+
+	/** 04/03/12 11:58:08 **/
+	case 0x4F7AE5D0:           // vIOS: 38v4380
+		/* Permissions check */
+		DCWrite8(0x20003452, 0xE0);
 
 		break;
 
@@ -321,6 +358,8 @@ s32 Patch_IopModule(void)
 	case 0x49511FC0:        // IOS: ???
 	case 0x4B8E3D46:        // IOS: 56v5661, 57v5918, 58v6175, 61v5661, 80v6943 
 	case 0x4B8B30CD:        // IOS: 36v3607, 38v4123
+	/** 04/03/12 12:00:18 **/
+	case 0x4F7AE652:        // vIOS: 38v4380
 	/** 04/02/12 14:03:56 **/
 	case 0x4F79B1CC:        // vIOS: 56v5918, 57v6175, 58v6432
 		/* SWI handler */

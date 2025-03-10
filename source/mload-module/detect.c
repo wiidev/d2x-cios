@@ -64,6 +64,11 @@ s32 Detect_DipModule(void)
 		ios.dipVersion = 0x4888E14C;
 		break;
 
+	case 0x20207C48:		// vIOS: 38v4380
+		/* DIP: 04/03/12 12:00:16 */
+		ios.dipVersion = 0x4F7AE650;
+		break;
+
 	case 0x20207EA8:		// IOS: 56v5661, 57v5918, 58v6175, 61v5661, 70v6687, 80v6943
 		/* DIP: 06/03/09 07:49:09 */
 		ios.dipVersion = 0x4A262AF5;
@@ -105,13 +110,12 @@ s32 Detect_EsModule(void)
 
 	case 0x201015E9:
 	{
-		#define ES_NUM 2
-		static moduleId esIds[ES_NUM] = {
+		static moduleId esIds[2] = {
 			{0x2010B8D2, "03/03/10 10:40:14", 0x4B8E90EE},  //  IOS: 56v5661, 57v5918, 58v6175, 61v5661, 80v6943
 			{0x2010BB2E, "04/02/12 14:00:51", 0x4F79B113}   // vIOS: 56v5918, 57v6175, 58v6432
 		};
 		
-		ios.esVersion = __Detect_ModuleVersion(esIds, ES_NUM);
+		ios.esVersion = __Detect_ModuleVersion(esIds, 2);
 		if (ios.esVersion == 0)
 			return DETECT_ERROR;
 
@@ -123,10 +127,20 @@ s32 Detect_EsModule(void)
 		ios.esVersion = 0x4B8B882B;
 		break;
 
-	case 0x2010139D:		// IOS: 36v3607, 38v4123
-		/* ES: 03/01/10 03:18:58 */
-		ios.esVersion = 0x4B8B8682;
+	case 0x2010139D:		//  IOS: 36v3607, 38v4123
+							// vIOS: 38v4380
+	{
+		static moduleId esIds[2] = {
+			{0x2010A3EE, "03/01/10 03:18:58", 0x4B8B3222},  //  IOS: 36v3607, 38v4123
+			{0x2010A64A, "04/03/12 12:05:51", 0x4F7AE79F}   // vIOS: 38v4380 (0000000E)
+		};
+		
+		ios.esVersion = __Detect_ModuleVersion(esIds, 2);
+		if (ios.esVersion == 0)
+			return DETECT_ERROR;
+
 		break;
+	}
 
 	default:
 		/* Unknown version */
@@ -150,6 +164,11 @@ s32 Detect_FfsModule(void)
 	case 0x2000200D:		// IOS: 36v3607, 38v4123
 		/* FFS: 12/23/08 17:26:21 */
 		ios.ffsVersion = 0x49511F3D;
+		break;
+
+	case 0x20001FE1:		// vIOS: 38v4380
+		/* FFS: 04/03/12 11:58:08 */
+		ios.ffsVersion = 0x4F7AE5D0;
 		break;
 
 	case 0x20006009:		// IOS: 56v5661, 57v5918, 58v6175, 60v6174, 61v5661, 70v6687, 80v6943 	
@@ -185,26 +204,43 @@ s32 Detect_IopModule(void)
 		break;
 
 	case 0xFFFF1D10:	//               IOS: 36v3607, 38v4123
+	                	//              vIOS: 38v4380
 	case 0xFFFF7938:	// gecko patched IOS: 36v3607, 38v4123
-		/* IOSP: 03/01/10 03:13:17 */
-		ios.iopVersion  = 0x4B8B30CD;
-		ios.syscallBase = 0xFFFF9100;
+	{
+		static moduleId iospIds[2] = {
+			{0xFFFF856B, "03/01/10 03:13:17", 0x4B8B30CD},  //  IOS: 36v3607, 38v4123
+			{0xFFFF83f3, "04/03/12 12:00:18", 0x4F7AE652}   // vIOS: 38v4380 (0000000E)
+		};
+
+		ios.iopVersion = __Detect_ModuleVersion(iospIds, 2);
+
+		switch (ios.iopVersion) {
+		case 0x4B8B30CD:   //  IOS: 36v3607, 38v4123
+			ios.syscallBase = 0xFFFF9100;
+			break;
+		case 0x4F7AE652:   // vIOS: 38v4380
+			ios.syscallBase = 0xFFFF8F80;
+			break;
+		default:
+			/* Unknown version */
+			return DETECT_ERROR;
+		}
 
 		break;
+	}
 
 	case 0xFFFF1F20:	//               IOS: 60v6174, 70v6687, 56v5661, 57v5918, 58v6175, 61v5661, 80v6943
 	                	//              vIOS: 56v5918, 57v6175, 58v6432
 	case 0xFFFF7B98:	// gecko patched IOS: 60v6174, 70v6687
 	case 0xFFFF7BD0:	// gecko patched IOS: 56v5661, 57v5918, 58v6175, 61v5661, 80v6943
 	{
-		#define IOSP_NUM 3
-		static moduleId iospIds[IOSP_NUM] = {
+		static moduleId iospIds[3] = {
 			{0xFFFF880B, "03/03/10 10:43:18", 0x4B8E3D46},  //  IOS: 56v5661, 57v5918, 58v6175, 61v5661, 80v6943
 			{0xFFFF8693, "04/02/12 14:03:56", 0x4F79B1CC},  // vIOS: 56v5918, 57v6175, 58v6432
 			{0xFFFF87D3, "11/24/08 15:39:12", 0x492ACAA0}   //  IOS: 60v6174, 70v6687
 		};
 
-		ios.iopVersion = __Detect_ModuleVersion(iospIds, IOSP_NUM);
+		ios.iopVersion = __Detect_ModuleVersion(iospIds, 3);
 
 		switch (ios.iopVersion) {
 		case 0x4B8E3D46:   // IOS: 56v5661, 57v5918, 58v6175, 61v5661, 80v6943

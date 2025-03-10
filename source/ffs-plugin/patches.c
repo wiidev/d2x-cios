@@ -141,6 +141,17 @@ s32 Patch_FfsModule(void)
 		break;
 	}
 
+	/** 04/03/12 11:58:08 **/
+	case 0x4F7AE5D0: {	// vIOS: 38v4380
+		static ffsAddrInfo aInfo = {
+			0x200021A4,	// table
+			0x20002170,	// reentry
+			0x20006090	// printf
+		};
+		__Patch_FfsModule(&aInfo);
+		break;
+	}
+
 	/** 11/24/08 15:36:10 **/
 	case 0x492AC9EA: {	// IOS: 56v5661, 57v5918, 58v6175, 60v6174, 61v5661, 70v6687, 80v6943
 		static ffsAddrInfo aInfo = {
@@ -195,6 +206,11 @@ s32 Patch_IopModule(void)
 	/** 03/01/10 03:13:17 **/
 	case 0x4B8B30CD:        // IOS: 36v3607, 38v4123
 		__Patch_IopModule(0xFFFF2E04);
+		break;
+
+	/** 04/03/12 12:00:18 **/
+	case 0x4F7AE652:        // vIOS: 38v4380
+		__Patch_IopModule(0xFFFF2E24);
 		break;
 
 	/** 11/24/08 15:39:12 **/
