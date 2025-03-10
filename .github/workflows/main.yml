@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download devkitPPC r32
         run: |
@@ -43,7 +43,7 @@ jobs:
           echo "upload_name=v${{ secrets.VERSION }}-$(git rev-parse --short=7 HEAD)" | tr ' ' '-' >> $GITHUB_ENV
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: d2x-${{ env.upload_name }}
           path: build
