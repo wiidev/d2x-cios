@@ -132,7 +132,7 @@ s32 Detect_EsModule(void)
 	{
 		static moduleId esIds[2] = {
 			{0x2010A3EE, "03/01/10 03:18:58", 0x4B8B3222},  //  IOS: 36v3607, 38v4123
-			{0x2010A64A, "04/03/12 12:05:51", 0x4F7AE79F}   // vIOS: 38v4380 (0000000E)
+			{0x2010A64A, "04/03/12 12:05:51", 0x4F7AE79F}   // vIOS: 38v4380
 		};
 		
 		ios.esVersion = __Detect_ModuleVersion(esIds, 2);
@@ -209,7 +209,7 @@ s32 Detect_IopModule(void)
 	{
 		static moduleId iospIds[2] = {
 			{0xFFFF856B, "03/01/10 03:13:17", 0x4B8B30CD},  //  IOS: 36v3607, 38v4123
-			{0xFFFF83f3, "04/03/12 12:00:18", 0x4F7AE652}   // vIOS: 38v4380 (0000000E)
+			{0xFFFF83f3, "04/03/12 12:00:18", 0x4F7AE652}   // vIOS: 38v4380
 		};
 
 		ios.iopVersion = __Detect_ModuleVersion(iospIds, 2);

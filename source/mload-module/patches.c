@@ -227,7 +227,7 @@ s32 Patch_EsModule(void)
 	}
 
 	/** 03/01/10 03:18:58 **/
-	case 0x4B8B8682: {	// IOS: 36v3607, 38v4123
+	case 0x4B8B3222: {	// IOS: 36v3607, 38v4123
 		static esAddrInfo addrInfo = {
 			0x13A750DE,	// signatureCheck1  (added in d2x v8 r42)
 			0x13A75266,	// signatureCheck2

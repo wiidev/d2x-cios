@@ -5,6 +5,8 @@
 
 [ d2x v11 ]
 
+- Fixed IOS38 version identification for Wii. It was originally set to the
+  wrong value 13 years ago.
 - Improved WiiWare & VC compatibility by using some MEM1 safe functions.
 - Improved game compatibility when using base IOS58 by ignoring encrypted
   USB drives that are used for Wii U games.

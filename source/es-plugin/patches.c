@@ -129,7 +129,7 @@ s32 Patch_EsModule(void)
 	}
 
 	/** 03/01/10 03:18:58 **/
-	case 0x4B8B8682: {	// IOS: 36v3607, 38v4123
+	case 0x4B8B3222: {	// IOS: 36v3607, 38v4123
 		static esAddrInfo addrInfo = {
 			0x20100048,	// open
 			0x201000CC,	// ioctlv
